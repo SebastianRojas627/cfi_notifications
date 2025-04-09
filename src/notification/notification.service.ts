@@ -37,4 +37,8 @@ export class NotificationService {
     console.log('Email sent:', info.messageID)
     return info;
   }
+
+  static testListener(requestId: string, email: string) {
+    console.log('correo enviado a', requestId, email)
+  }
 }
