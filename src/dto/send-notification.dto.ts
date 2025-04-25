@@ -5,12 +5,4 @@ export class SendNotificationDto {
     @ApiProperty()
     @IsString()
     to: string;
-
-    @ApiProperty()
-    @IsString()
-    subject: string;
-
-    @ApiProperty()
-    @IsString()
-    text: string;
 }

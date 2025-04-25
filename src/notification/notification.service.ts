@@ -7,38 +7,34 @@ import { SendNotificationDto } from 'src/dto/send-notification.dto';
 export class NotificationService {
   private transporter: nodemailer.Transporter;
 
-  constructor(
-    private configService: ConfigService
-  ) {
+  constructor(private configService: ConfigService) {
     this.transporter = nodemailer.createTransport({
       host: 'smtp.ethereal.email',
       port: 587,
       auth: {
-          user: 'silas.hoppe56@ethereal.email',
-          pass: 'bj2uEzpbsVSZWkwdXX'
-      }
-  });
-  
+        user: 'itzel.rodriguez@ethereal.email',
+        pass: '3Wc6Yp6KAYSQrz7uYQ',
+      },
+    });
   }
 
   async sendEmail(sendNotificationDto: SendNotificationDto) {
+    const { to} = sendNotificationDto;
 
-    const { to, subject, text} = sendNotificationDto;
-
-    const from = this.configService.get('email.user')
+    const from = this.configService.get('email.user');
 
     const info = await this.transporter.sendMail({
       from: `"Notificacion Service" <${from}>`,
       to,
-      subject,
-      text,
-    })
+      subject: "Nodemailer Test",
+      text: "This is a test notification alert letting know the user that a new information request has been filed by a police investigator",
+    });
 
-    console.log('Email sent:', info.messageID)
+    console.log('Email sent:', info.messageID);
     return info;
   }
 
   static testListener(requestId: string, email: string) {
-    console.log('correo enviado a', requestId, email)
+    console.log('correo enviado a', requestId, email);
   }
 }
